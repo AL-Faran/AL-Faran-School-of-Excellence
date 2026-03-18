@@ -1,0 +1,45 @@
+# Implementation Plan: AL-Faran School of Excellence SMS
+
+This plan outlines the creation of the complete UI layout, page structure, dashboard templates, and workflows for the School Management System (SMS).
+
+## User Review Required
+> [!IMPORTANT]
+> Since a full SMS with a real backend is a massive undertaking, this first phase will focus on building out the **Complete Frontend UI & Workflows (Templates)**. 
+> 
+> The templates will be fully styled, responsive, and include interactive dashboards. We will use mock data in JavaScript to visually simulate the "database-driven structure", charts, and data tables before a real backend (e.g., Node.js/DB) is eventually integrated.
+> 
+> *Tech Stack:* Vanilla HTML5, Vanilla CSS3 (Custom variables, Flexbox/Grid, Dark mode), Vanilla JavaScript (UI logic, Chart.js for graphs).
+> 
+> **Does this approach (building the comprehensive frontend UI templates first) sound good to you?**
+
+## Proposed Changes
+
+### Core Project Structure
+The project will be built inside `c:/Users/M Saeed computer/OneDrive/Desktop/Website` with the following skeleton:
+
+- `index.html` (Landing/Home Page)
+- `about.html`, `admissions.html`, `academics.html`, `facilities.html`, `contact.html` (Public Pages)
+- `login.html` (Multi-role secure login portal)
+- `admin-dashboard.html` (Admin portal)
+- `teacher-dashboard.html` (Teacher portal)
+- `student-dashboard.html` (Student portal)
+- `parent-dashboard.html` (Parent portal)
+- `/css/` -> `styles.css` (Global styles), `dashboard.css` (Portal styles)
+- `/js/` -> `main.js` (Public interactions), `dashboard.js` (Portal logic & mock API integration)
+- `/assets/` -> images, icons, logos
+
+### Implementation Details
+- **Aesthetics & Branding**: Premium, modern, sleek design with school-friendly colors (e.g., trust-inspiring blues and crisp whites), utilizing glassmorphism where appropriate to provide a dynamic "WOW" factor.
+- **Navigation**: Collapsible sidebar for authenticated dashboards, modern sticky navbar with hamburger menu for public pages.
+- **Data Visualization**: Interactive charts via Chart.js for performance, fee tracking, and attendance analytics.
+- **Responsiveness**: Mobile-first media queries to ensure the site looks native on phones, tablets, and desktop displays.
+- **Interactivity**: Instead of creating 50+ individual HTML files, the dashboards will use Vanilla JS to dynamically swap views (e.g., clicking "Fee Management" will hide "Student Management" and show the fee view) creating a modern Single-Page Application (SPA) feel while remaining purely Vanilla.
+- **Features**: Includes dark/light mode toggle, dynamic notification dropdowns, and mock data tables with basic search/filter simulators.
+
+## Verification Plan
+
+### Manual Verification
+- Launch local development server (or view HTML directly).
+- Test all interactive elements (navigation, tabs, dark mode, modals).
+- Verify dashboard chart rendering.
+- Test responsivenes across multiple screen widths (mobile, tablet, desktop).

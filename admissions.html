@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions | AL-Faran School of Excellence</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        /* Navbar Visibility Fix for Admissions Page */
+        .navbar:not(.scrolled) { background-color: var(--white) !important; box-shadow: var(--shadow-sm); }
+        .navbar:not(.scrolled) .nav-link { color: var(--primary-color) !important; }
+        .navbar:not(.scrolled) .brand-name { color: var(--primary-color) !important; }
+        .navbar:not(.scrolled) .mobile-menu-btn { color: var(--primary-color) !important; }
+        
+        /* Hero & Spacing Fix */
+        .hero { padding-bottom: 120px !important; }
+        .hero-subtitle { font-size: 1.3rem; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        /* Modern Form Redesign */
+        .admission-container {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-top: -120px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(26, 75, 132, 0.05);
+        }
+        .form-logo-box {
+            width: 160px;
+            height: 160px;
+            margin: -110px auto 30px;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid #fff;
+            overflow: hidden; /* Ensures logo stays in circle */
+        }
+        .form-logo-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Changed to cover for perfect circle fit */
+            border-radius: 50%;
+        }
+
+        /* Signature Section (Hidden by default) */
+        .signature-section {
+            display: none;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        .sig-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .sig-line {
+            border-top: 1px solid #000;
+            margin-top: 40px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Print Media Queries */
+        @media print {
+            body { background: white !important; }
+            .navbar, .footer, .hero, .btn-submit, .mobile-menu-btn, #theme-toggle, .section-header i { display: none !important; }
+            .admission-container { 
+                box-shadow: none !important; 
+                margin-top: 0 !important; 
+                border: none !important; 
+                padding: 0 !important;
+            }
+            .form-logo-box { margin-top: 0 !important; box-shadow: none !important; border: 2px solid #eee !important; }
+            .signature-section { display: grid !important; grid-template-columns: 1fr 1fr; gap: 40px; }
+            .form-control { border: 1px solid #ccc !important; box-shadow: none !important; }
+            .section-header { border-bottom: 2px solid #333 !important; }
+            .section-header h4 { color: #000 !important; }
+            .hero-title, .hero-subtitle { color: #000 !important; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-flex">
+            <span>Welcome to AL-Faran School of Excellence</span>
+            <div class="top-socials">
+                <a href="https://www.facebook.com/Alfaran.school.of.Excellence" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html"><img src="assets/Logo.png" alt="AL-Faran Logo" class="main-logo"></a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul id="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="academics.html" class="nav-link">Academics</a></li>
+                <li><a href="admissions.html" class="nav-link active">Admissions</a></li>
+                <li><a href="digital-skills.html" class="nav-link">S&TP</a></li>
+                <li><a href="elearning.html" class="nav-link">ELearning</a></li>
+                <li><a href="index.html#gallery" class="nav-link">Student Gallery</a></li>
+                <li><a href="login.html" class="nav-link">Portal</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="min-height: 40vh; padding-top: 120px; align-items: flex-start;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content text-center animate-fade-in" style="margin-top: 2rem;">
+            <h1 class="hero-title" style="font-size: 3rem;">Admissions 2026-27</h1>
+            <p class="hero-subtitle">Join the AL-Faran Family. Transform your child's future today.</p>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="py-5" style="min-height: 60vh; background: #f8fafc;">
+        <div class="container admission-container animate-fade-in">
+            <!-- 3D Logo Integration -->
+            <div class="form-logo-box">
+                <img src="assets/logo-3d.jpg" alt="AL-Faran Premium Logo">
+            </div>
+
+            <div class="section-title mb-5 text-center">
+                <span style="color: var(--primary-gold); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Admission Portal</span>
+                <h2 class="mt-2" style="font-size: 2.5rem; color: var(--primary-color);">Online Admission Form</h2>
+                <p class="text-muted mt-2">Secure your child's seat in the leading AI & Science specialized school.</p>
+            </div>
+
+            <form id="admission-form" class="admission-form">
+                <!-- 1. Student Details -->
+                <div class="section-header">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4 class="mb-0">1. Student Information</h4>
+                </div>
+                <div class="form-row"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div class="form-group">
+                        <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" id="af-student-name" class="form-control" required
+                            placeholder="Full name as per B-Form">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                        <input type="date" id="af-dob" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">B-Form Number (if available)</label>
+                        <input type="text" id="af-bform" class="form-control" placeholder="xxxxx-xxxxxxx-x">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                        <select id="af-gender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Place of Birth</label>
+                        <input type="text" id="af-pob" class="form-control" placeholder="City name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Passport Size Photo <span class="text-danger">*</span></label>
+                        <input type="file" id="af-student-photo" class="form-control" accept="image/*" required>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">Previous School & Grade (If any)</label>
+                        <input type="text" id="af-prev-school" class="form-control"
+                            placeholder="Name of previous institution and last grade completed">
+                    </div>
+                </div>
+
+                <!-- 2. Parent/Guardian Details -->
+                <div class="section-header">
+                    <i class="fas fa-users"></i>
+                    <h4 class="mb-0">2. Parent / Guardian Details</h4>
+                </div>
+                <div class="form-row"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div class="form-group">
+                        <label class="form-label">Father's Name <span class="text-danger">*</span></label>
+                        <input type="text" id="af-father-name" class="form-control" required
+                            placeholder="Legal father's name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mother's Name</label>
+                        <input type="text" id="af-mother-name" class="form-control" placeholder="Legal mother's name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CNIC Number <span class="text-danger">*</span></label>
+                        <input type="text" id="af-cnic" class="form-control" required placeholder="xxxxx-xxxxxxx-x">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Occupation</label>
+                        <input type="text" id="af-occupation" class="form-control" placeholder="Father's/Guardian's Profession">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Annual Income (Optional)</label>
+                        <input type="text" id="af-income" class="form-control" placeholder="Approx. yearly income">
+                    </div>
+                </div>
+
+                <!-- 3. Contact Details -->
+                <div class="section-header">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4 class="mb-0">3. Communication & Contact</h4>
+                </div>
+                <div class="form-row"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">Residential Address <span class="text-danger">*</span></label>
+                        <textarea id="af-current-address" class="form-control" rows="3" required
+                            placeholder="Complete street, area, and house details"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Primary WhatsApp Number <span class="text-danger">*</span></label>
+                        <input type="tel" id="af-whatsapp" class="form-control" required placeholder="03xx-xxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Emergency Number <span class="text-danger">*</span></label>
+                        <input type="text" id="af-emergency" class="form-control" required placeholder="Name - 03xx-xxxxxxx">
+                    </div>
+                </div>
+
+                <!-- 4. Admission Details -->
+                <div class="section-header">
+                    <i class="fas fa-school"></i>
+                    <h4 class="mb-0">4. Final Admission Selection</h4>
+                </div>
+                <div class="form-row"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                    <div class="form-group">
+                        <label class="form-label">Class Applied For <span class="text-danger">*</span></label>
+                        <select id="af-class" class="form-control" required>
+                            <option value="" disabled selected>Select Class</option>
+                            <option value="Playgroup">Extremely Early (Playgroup)</option>
+                            <option value="Nursery">Nursery</option>
+                            <option value="KG">Prep/KG</option>
+                            <option value="Class 1">Grade 1</option>
+                            <option value="Class 2">Grade 2</option>
+                            <option value="Class 3">Grade 3</option>
+                            <option value="Class 4">Grade 4</option>
+                            <option value="Class 5">Grade 5</option>
+                            <option value="Class 6">Grade 6</option>
+                            <option value="Class 7">Grade 7</option>
+                            <option value="Class 8">Grade 8</option>
+                            <option value="Class 9">Grade 9 (Matric)</option>
+                            <option value="Class 10">Grade 10 (Matric)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Academic Year</label>
+                        <select id="af-year" class="form-control">
+                            <option value="2026-2027" selected>2026-2027 Session</option>
+                            <option value="2027-2028">2027-2028 Session</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">School Transport</label>
+                        <select id="af-transport" class="form-control">
+                            <option value="No" selected>Not Required</option>
+                            <option value="Yes">Required</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn-submit" id="submit-btn-main">Submit Application <i class="fas fa-paper-plane ms-2"></i></button>
+                    
+                    <div id="print-action-box" style="display: none; margin-top: 2rem;">
+                        <button type="button" class="btn-submit" style="background: var(--success-color); box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);" onclick="window.print()">
+                            <i class="fas fa-download me-2"></i> Download / Print Application
+                        </button>
+                    </div>
+
+                    <p class="mt-4 text-muted" style="font-size: 0.9rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        <i class="fas fa-info-circle me-1"></i> Submission of this form signifies provisional interest. 
+                        Final admission is based on availability and successful completion of the entrance evaluation.
+                    </p>
+                </div>
+
+                <!-- Signature Section (Visible ONLY in Print) -->
+                <div class="signature-section">
+                    <div class="sig-box">
+                        <div class="sig-line"></div>
+                        <p style="font-weight: 700; margin-top: 10px;">Parent / Guardian Signature</p>
+                        <small class="text-muted">(Required for Verification)</small>
+                    </div>
+                    <div class="sig-box">
+                        <div class="sig-line"></div>
+                        <p style="font-weight: 700; margin-top: 10px;">Principal Signature</p>
+                        <small class="text-muted">AL-Faran School of Excellence</small>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div id="af-success-msg" class="alert alert-success mt-4 animate-fade-in"
+                    style="display: none; background: rgba(46, 204, 113, 0.1); border: 2px solid var(--success-color); color: var(--success-color); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                    <i class="fas fa-check-circle me-2" style="font-size: 1.5rem;"></i> <strong>Success!</strong> Application submitted. Please download the copy for your records.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <div class="brand mb-2">
+                    <div class="brand-logo"><img src="assets/logo.png" alt="AL-Faran Logo"
+                            style="width: 100%; height: 100%; object-fit: contain;"></div>
+                    <div class="brand-name" style="color: white;">AL-Faran</div>
+                </div>
+                <p class="text-muted">Empowering the next generation of leaders through quality education and strong
+                    moral values.</p>
+                <div class="social-links mt-2">
+                    <a href="https://www.facebook.com/Alfaran.school.of.Excellence" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 class="mb-2 text-white">Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="login.html">Portals Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 class="mb-2 text-white">Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Main Depalpur Road, Pakistani Pull</li>
+                    <li><i class="fas fa-phone"></i> 0302-7627881</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:alfaranschool20@gmail.com"
+                            style="color: white; text-decoration: none;">alfaranschool20@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center mt-4 pt-2 border-top">
+            <p class="text-muted">&copy; 2026 AL-Faran School of Excellence. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/admissions-form.js"></script>
+</body>
+
+</html>

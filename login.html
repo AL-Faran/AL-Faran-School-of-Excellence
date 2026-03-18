@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | AL-Faran School of Excellence</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body class="login-body">
+
+    <div class="login-container animate-fade-in">
+
+        <!-- Header -->
+        <div class="login-header">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <div class="login-logo">
+                <img src="assets/logo.png" alt="AL-Faran Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <h2>AL-Faran School of Excellence</h2>
+            <p style="font-size: 0.9rem; opacity: 0.9;">Secure Access Portal</p>
+            <div class="role-badge" id="role-badge">Admin</div>
+        </div>
+
+        <!-- Role Tabs -->
+        <div class="role-tabs">
+            <div class="role-tab active" data-role="admin">
+                <i class="fas fa-user-shield"></i>
+                Admin
+            </div>
+            <div class="role-tab" data-role="teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Teacher
+            </div>
+            <div class="role-tab" data-role="student">
+                <i class="fas fa-user-graduate"></i>
+                Student
+            </div>
+            <div class="role-tab" data-role="parent">
+                <i class="fas fa-users"></i>
+                Parent
+            </div>
+        </div>
+
+        <!-- Login Forms -->
+        <div class="login-form-area">
+
+            <!-- Admin Login -->
+            <form id="admin-login" class="login-view active" onsubmit="handleAdminLogin(event)">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary">Admin Login</h3>
+                    <p class="text-muted" style="font-size: 0.85rem;">Manage the entire school system</p>
+                </div>
+
+                <div id="admin-error-msg"
+                    style="display: none; color: white; background-color: var(--danger-color); padding: 10px; border-radius: var(--radius-md); text-align: center; margin-bottom: 15px; font-size: 0.9rem;">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user-shield"></i>
+                        <input type="text" id="admin-username" class="form-control" placeholder="AL-Faran School"
+                            required value="AL-Faran School">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="admin-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="forgot-password.html" style="font-size: 0.85rem;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Dashboard</button>
+            </form>
+
+            <!-- Teacher Login -->
+            <form id="teacher-login" class="login-view" onsubmit="handleTeacherLogin(event)">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary">Teacher Login</h3>
+                    <p class="text-muted" style="font-size: 0.85rem;">Access classes, attendance, and marks</p>
+                </div>
+                
+                <div id="teacher-error-msg" style="display: none; color: white; background-color: var(--danger-color); padding: 10px; border-radius: var(--radius-md); text-align: center; margin-bottom: 15px; font-size: 0.9rem;"></div>
+
+                <div class="form-group">
+                    <label class="form-label">Teacher Login ID (e.g. FSE-2601)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="teacher-username" class="form-control" placeholder="FSE-2601" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="teacher-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="forgot-password.html" style="font-size: 0.85rem;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Portal</button>
+            </form>
+
+            <!-- Student Login -->
+            <form id="student-login" class="login-view"
+                onsubmit="event.preventDefault(); window.location.href='student-dashboard.html';">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary">Student Login</h3>
+                    <p class="text-muted" style="font-size: 0.85rem;">View timetable, homework, and results</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Registration / Roll No.</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" class="form-control" placeholder="STD-2601" required value="student">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" placeholder="••••••••" required value="password">
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="forgot-password.html" style="font-size: 0.85rem;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Portal</button>
+            </form>
+
+            <!-- Parent Login -->
+            <form id="parent-login" class="login-view"
+                onsubmit="handleParentLogin(event)">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary">Parent Login</h3>
+                    <p class="text-muted" style="font-size: 0.85rem;">Monitor progress, attendance, and fees</p>
+                </div>
+
+                <div id="parent-error-msg" style="display: none; color: white; background-color: var(--danger-color); padding: 10px; border-radius: var(--radius-md); text-align: center; margin-bottom: 15px; font-size: 0.9rem;"></div>
+
+                <div class="form-group">
+                    <label class="form-label">Parent Login ID</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="parent-username" class="form-control" placeholder="P-FSE26-PG01" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="parent-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="forgot-password.html" style="font-size: 0.85rem;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Portal</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat v8) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // Simple logic to switch between role tabs
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.role-tab');
+            const views = document.querySelectorAll('.login-view');
+            const roleBadge = document.getElementById('role-badge');
+
+            // Apply saved dark theme if needed
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active from all tabs & views
+                    tabs.forEach(t => t.classList.remove('active'));
+                    views.forEach(v => v.classList.remove('active'));
+
+                    // Add active to clicked tab
+                    tab.classList.add('active');
+
+                    // Show corresponding view
+                    const role = tab.getAttribute('data-role');
+                    document.getElementById(role + '-login').classList.add('active');
+
+                    // Update badge text
+                    roleBadge.textContent = role.charAt(0).toUpperCase() + role.slice(1);
+                });
+            });
+        });
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('admin-username').value.trim();
+            const passwordInput = document.getElementById('admin-password').value;
+            const errorMsgContainer = document.getElementById('admin-error-msg');
+
+            // Retrieve from localStorage or fallback to default
+            const savedPassword = localStorage.getItem(usernameInput + '_password') || 'alfaran@2026';
+            const isValidUsername = ['al-faran school', 'admin'].includes(usernameInput.toLowerCase());
+
+            // Check if valid credentials (accept admin/admin as easy fallback)
+            if ((isValidUsername && passwordInput === savedPassword) || (usernameInput.toLowerCase() === 'admin' && passwordInput === 'admin')) {
+                // Use localStorage to avoid file:// scheme multi-tab issues
+                localStorage.setItem('isAdminLoggedIn', 'true');
+                sessionStorage.setItem('isAdminLoggedIn', 'true'); // Keep for backward compatibility
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                errorMsgContainer.textContent = 'Invalid ID or Password. Tip: Use "admin" for both.';
+                errorMsgContainer.style.display = 'block';
+            }
+        }
+
+        function handleTeacherLogin(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('teacher-username').value.trim();
+            const passwordInput = document.getElementById('teacher-password').value;
+            const errorMsgContainer = document.getElementById('teacher-error-msg');
+
+            const teachers = JSON.parse(localStorage.getItem('alfaran-teachers')) || [];
+            
+            // Allow a fallback default login for testing if no teachers exist
+            if (teachers.length === 0 && usernameInput === 'teacher' && passwordInput === 'password') {
+                sessionStorage.setItem('isTeacherLoggedIn', 'true');
+                sessionStorage.setItem('currentTeacherName', 'Demo Teacher');
+                sessionStorage.setItem('currentTeacherSubject', 'General Science');
+                window.location.href = 'teacher-dashboard.html';
+                return;
+            }
+
+            const foundTeacher = teachers.find(t => t.empId === usernameInput && t.password === passwordInput && t.status === 'Active');
+
+            if (foundTeacher) {
+                sessionStorage.setItem('isTeacherLoggedIn', 'true');
+                sessionStorage.setItem('currentTeacherId', foundTeacher.id);
+                sessionStorage.setItem('currentTeacherName', foundTeacher.name);
+                sessionStorage.setItem('currentTeacherSubject', foundTeacher.subject);
+                window.location.href = 'teacher-dashboard.html';
+            } else {
+                errorMsgContainer.textContent = 'Invalid Employee ID or Password. Please ensure your account is active.';
+                errorMsgContainer.style.display = 'block';
+            }
+        }
+
+        function handleParentLogin(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('parent-username').value.trim();
+            const passwordInput = document.getElementById('parent-password').value;
+            const errorMsgContainer = document.getElementById('parent-error-msg');
+
+            const students = JSON.parse(localStorage.getItem('alfaran-students')) || [];
+            
+            // Allow a fallback default login for testing
+            if (students.length === 0 && usernameInput === 'parent' && passwordInput === 'password') {
+                sessionStorage.setItem('isParentLoggedIn', 'true');
+                sessionStorage.setItem('currentStudentId', 'std_demo');
+                sessionStorage.setItem('currentStudentName', 'Demo Student');
+                sessionStorage.setItem('currentParentName', 'Demo Parent');
+                window.location.href = 'parent-dashboard.html';
+                return;
+            }
+
+            const foundStudent = students.find(s => s.parentId === usernameInput && s.parentPassword === passwordInput);
+
+            if (foundStudent) {
+                sessionStorage.setItem('isParentLoggedIn', 'true');
+                sessionStorage.setItem('currentStudentId', foundStudent.id);
+                sessionStorage.setItem('currentStudentName', foundStudent.name);
+                sessionStorage.setItem('currentStudentClass', foundStudent.class); // Added this line
+                sessionStorage.setItem('currentParentName', foundStudent.father || 'Parent');
+                window.location.href = 'parent-dashboard.html';
+            } else {
+                errorMsgContainer.textContent = 'Invalid Parent ID or Password. Please check the credentials provided by the school.';
+                errorMsgContainer.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
