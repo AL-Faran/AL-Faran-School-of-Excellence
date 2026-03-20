@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&TP Premium | AL-Faran School of Excellence</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --ds-primary: #16a085;
+            --ds-secondary: #00cec9;
+            --ds-accent: #f1c40f;
+            --ds-dark: #2c3e50;
+            --ds-card-bg: rgba(255, 255, 255, 0.95);
+            --sidebar-width: 400px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #f8faff;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Premium Top Navigation */
+        .ds-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--ds-primary), var(--ds-secondary));
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(22, 160, 133, 0.4);
+        }
+
+        /* Immersive Workspace */
+        .ds-workspace {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* Content Area (Left) */
+        .content-container {
+            flex: 1;
+            background: #fdfdfd;
+            overflow-y: auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        /* Premium Hero */
+        .hero-banner {
+            position: relative;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            margin: 20px;
+            border-radius: 30px;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('assets/stp/hero-premium.png') no-repeat center center/cover;
+            z-index: 1;
+            transform: scale(1.05);
+            animation: kenBurns 20s infinite alternate;
+        }
+
+        @keyframes kenBurns {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 75, 132, 0.8), rgba(22, 160, 133, 0.6));
+            z-index: 2;
+        }
+
+        .hero-content-inner {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Feature Sections */
+        .feature-container {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+        }
+
+        .program-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .program-section.reverse {
+            direction: rtl;
+        }
+
+        .program-section.reverse .program-text {
+            direction: ltr;
+        }
+
+        .program-image-box {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            transition: transform 0.5s ease;
+        }
+
+        .program-image-box:hover {
+            transform: scale(1.02);
+        }
+
+        .program-image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .program-badge {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            color: var(--ds-primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .program-text h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin: 0 0 20px 0;
+            color: var(--ds-dark);
+            position: relative;
+        }
+
+        .program-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0; width: 60px; height: 5px;
+            background: var(--ds-primary);
+            border-radius: 10px;
+        }
+
+        .program-desc {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #576574;
+            margin-bottom: 30px;
+        }
+
+        .program-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--ds-dark);
+        }
+
+        .highlight-item i {
+            color: var(--ds-primary);
+            font-size: 1.2rem;
+        }
+
+        .btn-premium {
+            padding: 15px 35px;
+            background: var(--ds-dark);
+            color: white;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium:hover {
+            background: var(--ds-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(22, 160, 133, 0.3);
+        }
+
+        /* Achievement Tracker */
+        .achievement-block {
+            background: linear-gradient(135deg, #2c3e50, #16a085);
+            margin: 40px 50px 80px;
+            padding: 60px;
+            border-radius: 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-block::after {
+            content: '\f091';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -30px; bottom: -30px;
+            font-size: 15rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .achievement-text h3 {
+            font-size: 2.2rem;
+            font-family: 'Outfit', sans-serif;
+            margin: 0 0 10px 0;
+        }
+
+        .achievement-text p {
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .stat-circle {
+            width: 150px;
+            height: 150px;
+            border: 8px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-circle span {
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Sidebar AI Mentor */
+        .ds-sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.02);
+        }
+
+        .ds-ai-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .mentor-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--ds-primary), var(--ds-secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3);
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background: #f8faff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chat-msg {
+            max-width: 90%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .msg-ai {
+            background: white;
+            color: #2c3e50;
+            border-bottom-left-radius: 0;
+            align-self: flex-start;
+        }
+
+        .msg-user {
+            background: var(--ds-primary);
+            color: white;
+            border-bottom-right-radius: 0;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            padding: 25px;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .chat-form {
+            display: flex;
+            gap: 15px;
+            background: #f0f2f5;
+            padding: 8px;
+            border-radius: 50px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 10px 15px;
+            outline: none;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .chat-send-btn {
+            background: var(--ds-primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(22, 160, 133, 0.3);
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #999; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Premium Top Header -->
+    <header class="ds-header">
+        <div class="ds-header-left">
+            <button class="back-btn" id="btn-back">
+                <i class="fas fa-chevron-left"></i>
+                <span>BACK TO DASHBOARD</span>
+            </button>
+        </div>
+        <div class="ds-header-title">
+            <h3 style="margin: 0; font-family: 'Outfit', sans-serif; font-weight: 800; color: #2c3e50;">STP PREMIER STUDIO</h3>
+        </div>
+        <div class="ds-header-right">
+            <button class="btn btn-outline" id="theme-toggle" style="border:none; background: #f0f2f5; padding: 12px; border-radius: 12px;">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="ds-workspace">
+
+        <!-- Immersive Content Area -->
+        <div class="content-container">
+
+            <div class="hero-banner">
+                <div class="hero-content-inner">
+                    <div class="hero-tag">Innovation Hub 2024</div>
+                    <h1 class="hero-title">S&TP: THE SCIENCE & TECH PROGRAM</h1>
+                    <p style="font-size: 1.4rem; line-height: 1.6; opacity: 0.95; font-weight: 400; max-width: 800px; margin: 0 auto;">
+                        Step into the future of learning. Our state-of-the-art AI and Robotics lab empowers children with hands-on engineering, coding, and problem-solving skills for the 21st century.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-container">
+                
+                <!-- Track 1: AI for Champs -->
+                <section class="program-section">
+                    <div class="program-image-box">
+                        <img src="assets/stp/ai-premium.png" alt="AI for Champs">
+                        <div class="program-badge">LEVEL: 01</div>
+                    </div>
+                    <div class="program-text">
+                        <h2>AI FOR CHAMPS</h2>
+                        <p class="program-desc">
+                            Discover the magic behind Artificial Intelligence. Our foundation course introduces young minds to the world of AI logic, prompt engineering, and digital neural networks through interactive play and experimentation.
+                        </p>
+                        <div class="program-highlights">
+                            <div class="highlight-item"><i class="fas fa-brain"></i> AI Logic Design</div>
+                            <div class="highlight-item"><i class="fas fa-terminal"></i> Prompt Engineering</div>
+                            <div class="highlight-item"><i class="fas fa-microchip"></i> Future Tech Trends</div>
+                            <div class="highlight-item"><i class="fas fa-rocket"></i> Creative Projects</div>
+                        </div>
+                        <a href="#" class="btn-premium">START YOUR JOURNEY <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </section>
+
+                <!-- Track 2: Robotics -->
+                <section class="program-section reverse">
+                    <div class="program-image-box">
+                        <img src="assets/stp/robotics-premium.png" alt="Robotics">
+                        <div class="program-badge" style="background: #e67e22; color: white;">LEVEL: 02</div>
+                    </div>
+                    <div class="program-text">
+                        <h2>ROBOTICS & ENGINEERING</h2>
+                        <p class="program-desc">
+                            Bring your ideas to life. In this hands-on track, students build, assemble, and program their own robots. Using advanced electronic kits and AI-driven sensors, they learn the core principles of mechanical and electrical engineering.
+                        </p>
+                        <div class="program-highlights">
+                            <div class="highlight-item"><i class="fas fa-robot"></i> Bot Assembly</div>
+                            <div class="highlight-item"><i class="fas fa-bolt"></i> Circuit Design</div>
+                            <div class="highlight-item"><i class="fas fa-toggle-on"></i> AI Sensor Tech</div>
+                            <div class="highlight-item"><i class="fas fa-tools"></i> 3D Prototyping</div>
+                        </div>
+                        <a href="#" class="btn-premium" style="background: #e67e22;">UNLEASH CREATIVITY <i class="fas fa-plus"></i></a>
+                    </div>
+                </section>
+
+                <!-- Track 3: Coding with AI -->
+                <section class="program-section">
+                    <div class="program-image-box">
+                        <img src="assets/stp/coding-premium.png" alt="Coding with AI">
+                        <div class="program-badge" style="background: #e74c3c; color: white;">LEVEL: 03</div>
+                    </div>
+                    <div class="program-text">
+                        <h2>CODING WITH AI POWER</h2>
+                        <p class="program-desc">
+                            Master the languages of the future. Students learn to write clean, efficient code in Python and Scratch, while leveraging modern AI assistants to debug, optimize, and build complex applications faster than ever before.
+                        </p>
+                        <div class="program-highlights">
+                            <div class="highlight-item"><i class="fab fa-python"></i> Python Mastery</div>
+                            <div class="highlight-item"><i class="fas fa-cubes"></i> Scratch Logic</div>
+                            <div class="highlight-item"><i class="fas fa-laptop-code"></i> AI Debugging</div>
+                            <div class="highlight-item"><i class="fas fa-database"></i> App Development</div>
+                        </div>
+                        <a href="#" class="btn-premium" style="background: #e74c3c;">VIVE INTO CODE <i class="fas fa-code"></i></a>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Achievement Tracker -->
+            <div class="achievement-block">
+                <div class="achievement-text">
+                    <h3>YOUR ACHIEVEMENT TRACKER</h3>
+                    <p>Track your progress across all tracks and earn digital certificates.</p>
+                </div>
+                <div class="stat-circle">
+                    <span>0%</span>
+                    <p style="margin:0; font-size: 0.8rem; font-weight: 700;">COMPLETE</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- AI Mentor Sidebar -->
+        <aside class="ds-sidebar">
+            <div class="ds-ai-header">
+                <div class="mentor-avatar"><i class="fas fa-brain"></i></div>
+                <div>
+                    <h3 style="margin: 0; font-family: 'Outfit', sans-serif; font-weight: 800; color: #2c3e50;">SKILLS MENTOR</h3>
+                    <span style="font-size: 0.75rem; color: var(--ds-primary); font-weight: 800; letter-spacing: 1px;">SYSTEM ONLINE</span>
+                </div>
+            </div>
+
+            <div class="chat-area" id="chat-history">
+                <!-- Welcome Message injected by JS -->
+            </div>
+
+            <!-- Typing indicator -->
+            <div class="typing-indicator" id="typing-indicator" style="padding: 0 25px 10px; font-size: 0.8rem; color: #999; display: none;">
+                Mentor is analyzing...
+            </div>
+
+            <div class="chat-input-area">
+                <form class="chat-form" id="chat-form">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Type your question..." required autocomplete="off">
+                    <button type="submit" class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Logic Script -->
+    <script src="js/ai-service.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/digital-skills.js"></script>
+</body>
+
+</html>

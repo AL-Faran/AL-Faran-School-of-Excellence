@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics | AL-Faran School of Excellence</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        /* Navbar Visibility Fix */
+        .navbar:not(.scrolled) { 
+            background-color: white !important; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .navbar:not(.scrolled) .nav-link, 
+        .navbar:not(.scrolled) .brand-name,
+        .navbar:not(.scrolled) .mobile-menu-btn { 
+            color: var(--primary-blue) !important; 
+        }
+        .navbar:not(.scrolled) #theme-toggle { 
+            color: var(--primary-blue) !important; 
+            border-color: rgba(26,75,132,0.2) !important; 
+        }
+
+        /* Academic Pathways Section Styles */
+        .pathways-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef2f5 100%);
+            position: relative;
+            z-index: 10;
+            margin-top: -60px;
+        }
+        
+        .pathways-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .pathways-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        .pathway-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-image-box {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .pathway-card:hover .card-image-box img {
+            transform: scale(1.1);
+        }
+        
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Color Coded Borders - Matching Mockup */
+        .card-green { border-left: 6px solid #2ecc71; }
+        .card-blue { border-left: 6px solid #3498db; }
+        .card-purple { border-left: 6px solid #9b59b6; }
+        .card-orange { border-left: 6px solid #e67e22; }
+        
+        .pathway-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pathway-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .pathway-subtitle {
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .pathway-desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        .cta-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: auto;
+        }
+        
+        .pathway-cta {
+            background: #2a8d8d; /* Teal color from mockup */
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(42, 141, 141, 0.2);
+        }
+        
+        .pathway-cta:hover {
+            background: var(--text-dark);
+            box-shadow: 0 6px 15px rgba(42, 141, 141, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 1200px) {
+            .pathways-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+        @media (max-width: 768px) {
+            .pathways-grid { grid-template-columns: 1fr; }
+            .pathways-section { padding: 60px 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-flex">
+            <span>Welcome to AL-Faran School of Excellence</span>
+            <div class="top-socials">
+                <a href="https://www.facebook.com/Alfaran.school.of.Excellence" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html"><img src="assets/logo.png" alt="AL-Faran Logo" class="main-logo"></a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul id="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="academics.html" class="nav-link active">Academics</a></li>
+                <li><a href="admissions.html" class="nav-link">Admissions</a></li>
+                <li><a href="digital-skills.html" class="nav-link">S&TP</a></li>
+                <li><a href="elearning.html" class="nav-link">ELearning</a></li>
+                <li><a href="index.html#gallery" class="nav-link">Student Gallery</a></li>
+                <li><a href="login.html" class="nav-link">Portal</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header Hero -->
+    <header class="hero"
+        style="min-height: 50vh; padding-top: 120px; align-items: flex-start; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/academics-hero.png') no-repeat center center / cover;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content text-center animate-fade-in" style="margin-top: 2rem;">
+            <h1 class="hero-title" style="font-size: 3.5rem; color: #ffffff; text-shadow: 2px 2px 8px rgba(0,0,0,0.8);">Academic Excellence</h1>
+            <p class="hero-subtitle" style="color: #f8f9fa; font-size: 1.25rem; text-shadow: 1px 1px 6px rgba(0,0,0,0.8);">Empowering intellects through modern methodology and rigorous standards.</p>
+        </div>
+    </header>
+
+    <!-- Educational Approach Section (Replaced with Academic Pathways) -->
+    <section class="pathways-section">
+        <div class="container">
+            <div class="pathways-header">
+                <h2>AL-FARAN SCHOOL ACADEMIC PATHWAYS</h2>
+                <div style="height: 4px; width: 80px; background: linear-gradient(90deg, #3498db, #9b59b6); margin: 0 auto; border-radius: 10px;"></div>
+            </div>
+
+            <div class="pathways-grid">
+                <!-- Card 1: Pre-School -->
+                <div class="pathway-card card-green">
+                    <div class="card-image-box">
+                        <img src="assets/academics/pre-school.png" alt="Pre-School Development">
+                    </div>
+                    <div class="card-body">
+                        <div class="pathway-title">PRE-SCHOOL: EARLY EXPLORERS</div>
+                        <div class="pathway-subtitle">Play Group, Nursery, Prep</div>
+                        <p class="pathway-desc">Cultivating a love for learning through an interactive Oxford-guided play-based curriculum, with playful AI-supported early development tools.</p>
+                        <div class="cta-container">
+                            <a href="#" class="pathway-cta">Nurture with AI</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Primary School -->
+                <div class="pathway-card card-blue">
+                    <div class="card-image-box">
+                        <img src="assets/academics/primary.png" alt="Primary School Learning">
+                    </div>
+                    <div class="card-body">
+                        <div class="pathway-title">PRIMARY SCHOOL: THE LEARNING LADDER</div>
+                        <div class="pathway-subtitle">Classes 1-5</div>
+                        <p class="pathway-desc">Building unbreakable foundations in core subjects using interactive Oxford modules, integrated with AI-personalized tutoring for every student.</p>
+                        <div class="cta-container">
+                            <a href="#" class="pathway-cta">Explore the Core</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Elementary School -->
+                <div class="pathway-card card-purple">
+                    <div class="card-image-box">
+                        <img src="assets/academics/elementary.png" alt="Elementary Advancement">
+                    </div>
+                    <div class="card-body">
+                        <div class="pathway-title">ELEMENTARY SCHOOL: ACADEMIC ADVANCEMENT</div>
+                        <div class="pathway-subtitle">Classes 6-8 (Board Exam Prep)</div>
+                        <p class="pathway-desc">Crucial years for conceptual strengthening, featuring problem-solving challenges and critical thinking with embedded AI analytical tools.</p>
+                        <div class="cta-container">
+                            <a href="#" class="pathway-cta">Engage Thinking</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Secondary School -->
+                <div class="pathway-card card-orange">
+                    <div class="card-image-box">
+                        <img src="assets/academics/secondary.png" alt="Secondary Matriculation">
+                    </div>
+                    <div class="card-body">
+                        <div class="pathway-title">SECONDARY SCHOOL: MATRICULATION MASTERS</div>
+                        <div class="pathway-subtitle">Classes 9-10 (Board Exam Prep)</div>
+                        <p class="pathway-desc">Intensive BISE exam preparation, past paper drills, and advanced conceptual strengthening, powered by AI-driven performance analytics.</p>
+                        <div class="cta-container">
+                            <a href="#" class="pathway-cta">Succeed in Boards</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Learning & Science Labs -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-bold text-uppercase tracking-wide">Modern Education</span>
+                <h2 class="mt-2">Digital Learning Ecosystem</h2>
+                <p class="text-muted mt-2" style="max-width: 600px; margin: 0 auto;">We integrate state-of-the-art
+                    technology directly into our academic workflow.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <!-- Digital Notes -->
+                <div class="card"
+                    style="padding: 2rem; text-align: center; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: white; transition: transform 0.3s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='none'">
+                    <div
+                        style="width: 80px; height: 80px; background: rgba(26,75,132,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;">
+                        <i class="fas fa-file-pdf fa-2x text-primary"></i>
+                    </div>
+                    <h3 class="mb-2">Digital Notes Repository</h3>
+                    <p class="text-muted mb-4">Students have 24/7 access to high-quality PDF notes, slides, and
+                        assignments uploaded directly by our faculty.</p>
+                    <a href="login.html" class="btn btn-outline" style="width: 100%;">Access Student Portal</a>
+                </div>
+
+                <!-- Video Lectures -->
+                <div class="card"
+                    style="padding: 2rem; text-align: center; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: white; transition: transform 0.3s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='none'">
+                    <div
+                        style="width: 80px; height: 80px; background: rgba(231,76,60,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;">
+                        <i class="fas fa-play-circle fa-2x text-danger"></i>
+                    </div>
+                    <h3 class="mb-2">HD Video Lectures</h3>
+                    <p class="text-muted mb-4">Missed a class? Review vital concepts through our curated library of
+                        recorded lectures and interactive sessions.</p>
+                    <a href="login.html" class="btn btn-outline text-danger"
+                        style="border-color: var(--danger-color); width: 100%;">Watch Lectures</a>
+                </div>
+
+                <!-- Virtual Lab Custom Highlight -->
+                <div class="card"
+                    style="padding: 2.5rem; border: none; border-radius: var(--radius-md); background: linear-gradient(135deg, #16a085 0%, #2ecc71 100%); color: white; transition: transform 0.3s ease; grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <span class="badge bg-white text-success mb-2" style="font-weight: 700;">Exclusive AI
+                            Feature</span>
+                        <h2 class="mb-3" style="color: white; font-size: 2.5rem;">Al-Faran AI Science Lab</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem;">Pioneering the future of
+                            learning with PhET interactive simulations and our in-house AI Assistant. Conduct complex
+                            Physics and Chemistry experiments safely in a virtual environment.</p>
+                        <a href="virtual-lab.html" class="btn btn-light btn-lg"
+                            style="color: #16a085; font-weight: bold; border-radius: 30px; padding: 12px 30px;">
+                            <i class="fas fa-flask mr-2"></i> Enter Virtual Lab
+                        </a>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; text-align: center;">
+                        <i class="fas fa-microscope text-white" style="font-size: 8rem; opacity: 0.5;"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <div class="brand mb-2">
+                    <div class="brand-logo"><img src="assets/logo.png" alt="AL-Faran Logo"
+                            style="width: 100%; height: 100%; object-fit: contain;"></div>
+                    <div class="brand-name" style="color: white;">AL-Faran</div>
+                </div>
+                <p class="text-muted">Empowering the next generation of leaders through quality education and strong
+                    moral values.</p>
+                <div class="social-links mt-2">
+                    <a href="https://www.facebook.com/Alfaran.school.of.Excellence" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 class="mb-2 text-white">Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="login.html">Portals Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 class="mb-2 text-white">Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Main Depalpur Road, Pakistani Pull</li>
+                    <li><i class="fas fa-phone"></i> 0302-7627881</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:alfaranschool20@gmail.com"
+                            style="color: white; text-decoration: none;">alfaranschool20@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center mt-4 pt-2 border-top">
+            <p class="text-muted">&copy; 2026 AL-Faran School of Excellence. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main Global Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
