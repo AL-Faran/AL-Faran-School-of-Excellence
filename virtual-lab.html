@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Virtual Lab | AL-Faran School</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --lab-sidebar-width: 380px;
+            --ai-primary: #8e44ad;
+            --ai-secondary: #9b59b6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* Prevent body scroll, layout handles it */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Top Navigation */
+        .lab-header {
+            background: var(--surface-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .lab-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            background: rgba(26, 75, 132, 0.1);
+            color: var(--primary-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .subject-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .subject-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subject-btn.active.physics {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .subject-btn.active.chemistry {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .subject-btn.active.biology {
+            background: var(--warning-color);
+            color: white;
+            border-color: var(--warning-color);
+        }
+
+        .lab-header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Main Workspace */
+        .lab-workspace {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+
+        /* Simulation Area */
+        .sim-container {
+            flex: 1;
+            background: #000;
+            position: relative;
+        }
+
+        .sim-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .sim-overlay-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--surface-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        /* AI Assistant Sidebar */
+        .ai-sidebar {
+            width: var(--lab-sidebar-width);
+            background: var(--surface-color);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .ai-header {
+            padding: 15px;
+            background: linear-gradient(135deg, var(--ai-primary), var(--ai-secondary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ai-title {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        /* AI Modes */
+        .ai-modes {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ai-mode-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .ai-mode-btn.active {
+            color: var(--ai-primary);
+            border-bottom-color: var(--ai-primary);
+        }
+
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .msg-ai {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-top-left-radius: 2px;
+            align-self: flex-start;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            color: var(--text-color);
+        }
+
+        .msg-user {
+            background: var(--ai-primary);
+            color: white;
+            border-top-right-radius: 2px;
+            align-self: flex-end;
+            box-shadow: 0 2px 5px rgba(142, 68, 173, 0.2);
+        }
+
+        .guided-task-card {
+            background: rgba(142, 68, 173, 0.05);
+            border: 1px dashed var(--ai-primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Input Area */
+        .chat-input-area {
+            padding: 15px;
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            border-color: var(--ai-primary);
+        }
+
+        .chat-send-btn {
+            background: var(--ai-primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: var(--ai-secondary);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: transparent;
+            padding: 5px 10px;
+            gap: 5px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Quick Prompts Container */
+        .quick-prompts {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: -5px;
+        }
+
+        .quick-prompts::-webkit-scrollbar {
+            display: none;
+        }
+
+        .quick-prompt-btn {
+            background: rgba(142, 68, 173, 0.1);
+            color: var(--ai-primary);
+            border: 1px solid rgba(142, 68, 173, 0.2);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .quick-prompt-btn:hover {
+            background: var(--ai-primary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Configuration Header -->
+    <header class="lab-header">
+        <div class="lab-header-left">
+            <button class="back-btn" id="btn-back"><i class="fas fa-arrow-left"></i> Exit Lab</button>
+            <div style="height: 20px; width: 1px; background: var(--border-color); margin: 0 5px;"></div>
+            <div class="subject-selector">
+                <button class="subject-btn active physics" data-subject="physics"><i class="fas fa-bolt"></i>
+                    Physics</button>
+                <button class="subject-btn chemistry" data-subject="chemistry"><i class="fas fa-flask"></i>
+                    Chemistry</button>
+                <button class="subject-btn biology" data-subject="biology"><i class="fas fa-leaf"></i> Biology</button>
+            </div>
+        </div>
+        <div class="lab-header-right">
+            <span style="font-weight: 600; color: var(--text-muted);" id="current-lab-title">DC Circuit
+                Construction</span>
+            <button class="btn btn-outline" id="theme-toggle" style="border:none; padding: 0.5rem;"><i
+                    class="fas fa-moon"></i></button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="lab-workspace">
+
+        <!-- PhET Simulator Area -->
+        <div class="sim-container">
+            <div class="sim-overlay-loader" id="sim-loader">
+                <i class="fas fa-flask fa-spin fa-3x text-primary mb-3"></i>
+                <h3>Loading Virtual Lab Environment...</h3>
+                <p class="text-muted">Connecting to PhET Interactive Simulations</p>
+            </div>
+            <iframe id="sim-frame" class="sim-iframe" src="" allowfullscreen></iframe>
+        </div>
+
+        <!-- AI Assistant Sidebar -->
+        <aside class="ai-sidebar">
+            <div class="ai-header">
+                <h3 class="ai-title"><i class="fas fa-robot"></i> AI Lab Guide</h3>
+                <span class="ai-badge">ONLINE</span>
+            </div>
+
+            <div class="ai-modes">
+                <button class="ai-mode-btn active" id="mode-ask"><i class="fas fa-comments mr-1"></i> Ask AI</button>
+                <button class="ai-mode-btn" id="mode-guide"><i class="fas fa-map-signs mr-1"></i> Guided Tasks</button>
+            </div>
+
+            <div class="chat-area" id="chat-history">
+                <!-- Welcome Message dynamically injected by JS -->
+            </div>
+
+            <!-- Typing indicator -->
+            <div class="typing-indicator" id="typing-indicator">
+                AI is thinking <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="quick-prompts" id="quick-prompts-container">
+                    <!-- Quick prompts generated dynamically based on Subject -->
+                </div>
+                <form class="chat-form" id="chat-form">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask about this experiment..."
+                        required autocomplete="off">
+                    <button type="submit" class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Logic Script -->
+    <script src="js/ai-service.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/virtual-lab.js"></script>
+</body>
+
+</html>

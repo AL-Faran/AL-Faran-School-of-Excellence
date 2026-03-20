@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | AL-Faran School</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header" style="background: rgba(0,0,0,0.1);">
+            <div class="sidebar-logo">
+                <img src="assets/logo.png" alt="AL-Faran Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="sidebar-brand">
+                <h3>Student Portal</h3>
+            </div>
+        </div>
+
+        <div class="sidebar-nav">
+            <div class="nav-item">
+                <a class="nav-link-item active" data-target="overview">
+                    <div class="nav-icon"><i class="fas fa-th-large"></i></div>
+                    <div class="nav-text">My Dashboard</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="timetable">
+                    <div class="nav-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="nav-text">Class Timetable</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="homework">
+                    <div class="nav-icon"><i class="fas fa-book-reader"></i></div>
+                    <div class="nav-text">Homework & Material</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="attendance">
+                    <div class="nav-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="nav-text">My Attendance</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="results">
+                    <div class="nav-icon"><i class="fas fa-medal"></i></div>
+                    <div class="nav-text">Exam Results</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="curriculum">
+                    <div class="nav-icon"><i class="fas fa-flask text-primary"></i></div>
+                    <div class="nav-text">Online Classes & Labs</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" href="digital-skills.html">
+                    <div class="nav-icon"><i class="fas fa-laptop-code" style="color: #16a085;"></i></div>
+                    <div class="nav-text">The IT Studio</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <!-- Using an image placeholder for the student -->
+                <div class="avatar"
+                    style="background: url('https://ui-avatars.com/api/?name=Zaid+Ahmed&background=f39c12&color=fff'); background-size: cover;">
+                </div>
+                <div class="user-info">
+                    <div class="user-name">Zaid Ahmed</div>
+                    <div class="user-role">Grade 10 - A // Roll: 2601</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="toggle-sidebar-btn" id="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-outline" id="theme-toggle" title="Toggle Dark Mode"
+                    style="border:none; padding: 0.5rem;">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="action-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge-indicator">2</span>
+                </div>
+                <div class="action-icon text-primary ml-3" title="Profile Details">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <a href="login.html" class="action-icon" title="Logout" style="color: var(--danger-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div class="dashboard-content">
+
+            <!-- 1. OVERVIEW VIEW -->
+            <section id="view-overview" class="view-section active">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Hello, Zaid!</h1>
+                        <div class="breadcrumb">Welcome back to your learning portal</div>
+                    </div>
+                </div>
+
+                <!-- Snapshot Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-details">
+                            <h4>Overall Attendance</h4>
+                            <div class="value">92%</div>
+                            <small class="text-success">Excellent!</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                        <div class="stat-details">
+                            <h4>Pending Homework</h4>
+                            <div class="value">2</div>
+                            <small class="text-danger">Due Tomorrow</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon"><i class="fas fa-chalkboard"></i></div>
+                        <div class="stat-details">
+                            <h4>Next Class</h4>
+                            <div class="value" style="font-size: 1.25rem;">Physics</div>
+                            <small class="text-muted">In 15 minutes (Room 102)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Layout -->
+                <div class="charts-grid mt-4">
+
+                    <!-- Notices/Announcements -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="mb-0"><i class="fas fa-bullhorn text-primary mr-2"></i> School Noticeboard</h3>
+                        </div>
+                        <div style="padding: 1rem 1.5rem;">
+                            <div
+                                style="padding: 1rem; border-left: 4px solid var(--primary-color); background: rgba(26, 75, 132, 0.05); margin-bottom: 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                                <h4 style="margin-bottom: 5px;">Mid-Term Exam Schedule Released</h4>
+                                <p class="text-muted" style="font-size: 0.9rem;">The schedule for the upcoming Mid-Term
+                                    exams has been published. Exams begin on November 15th.</p>
+                                <small class="text-primary font-weight-bold" style="display: block; margin-top: 5px;"><i
+                                        class="fas fa-clock"></i> Posted today</small>
+                            </div>
+
+                            <div
+                                style="padding: 1rem; border-left: 4px solid var(--secondary-color); background: rgba(243, 156, 18, 0.05); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                                <h4 style="margin-bottom: 5px;">Science Fair Registration</h4>
+                                <p class="text-muted" style="font-size: 0.9rem;">Last date to submit your science fair
+                                    projects is Friday. Contact Mr. Ali for details.</p>
+                                <small class="text-primary font-weight-bold" style="display: block; margin-top: 5px;"><i
+                                        class="fas fa-clock"></i> Posted 2 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Homework Widget -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="mb-0"><i class="fas fa-book-open text-warning mr-2"></i> Quick Tasks</h3>
+                            <button class="btn btn-outline" style="padding: 2px 10px; font-size: 0.8rem;"
+                                onclick="document.querySelector('[data-target=homework]').click()">View All</button>
+                        </div>
+                        <ul style="padding: 1rem; margin: 0; list-style: none;">
+                            <li
+                                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+                                <div>
+                                    <h5 style="margin: 0;">Math Exercises Ch-4</h5>
+                                    <small class="text-danger">Due: Tomorrow</small>
+                                </div>
+                                <button class="btn btn-primary"
+                                    style="padding: 4px 10px; font-size: 0.75rem;">Upload</button>
+                            </li>
+                            <li style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h5 style="margin: 0;">English Essay</h5>
+                                    <small class="text-muted">Due: Friday</small>
+                                </div>
+                                <button class="btn btn-outline"
+                                    style="padding: 4px 10px; font-size: 0.75rem;">Pending</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 2. TIMETABLE VIEW (Basic implementation) -->
+            <section id="view-timetable" class="view-section">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Weekly Timetable</h1>
+                        <div class="breadcrumb">Grade 10 - Section A</div>
+                    </div>
+                    <button class="btn btn-outline"><i class="fas fa-print"></i> Print</button>
+                </div>
+
+                <div class="table-container mt-3">
+                    <div style="overflow-x: auto; padding: 1rem;">
+                        <table class="data-table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-weight-bold text-primary">08:00 - 08:45</td>
+                                    <td>Mathematics<br><small class="text-muted">Mr. Ali</small></td>
+                                    <td>Physics<br><small class="text-muted">Mr. Usman</small></td>
+                                    <td>Mathematics<br><small class="text-muted">Mr. Ali</small></td>
+                                    <td>English<br><small class="text-muted">Mrs. Sara</small></td>
+                                    <td>Chemistry<br><small class="text-muted">Dr. Khan</small></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold text-primary">08:45 - 09:30</td>
+                                    <td>Physics<br><small class="text-muted">Mr. Usman</small></td>
+                                    <td>Chemistry<br><small class="text-muted">Dr. Khan</small></td>
+                                    <td>English<br><small class="text-muted">Mrs. Sara</small></td>
+                                    <td>Mathematics<br><small class="text-muted">Mr. Ali</small></td>
+                                    <td>Biology<br><small class="text-muted">Ms. Fatima</small></td>
+                                </tr>
+                                <tr style="background: rgba(243, 156, 18, 0.1);">
+                                    <td class="font-weight-bold text-secondary">09:30 - 10:00</td>
+                                    <td colspan="5" class="font-weight-bold text-secondary">--- RECESS / BREAK ---</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold text-primary">10:00 - 10:45</td>
+                                    <td>English<br><small class="text-muted">Mrs. Sara</small></td>
+                                    <td>Biology<br><small class="text-muted">Ms. Fatima</small></td>
+                                    <td>Computer<br><small class="text-muted">Mr. Raza</small></td>
+                                    <td>Physics<br><small class="text-muted">Mr. Usman</small></td>
+                                    <td>Islamiat<br><small class="text-muted">Qari Sb.</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other Stubs -->
+            <section id="view-homework" class="view-section">
+                <h3>Homework & Material Module (In Dev)</h3>
+            </section>
+            <section id="view-attendance" class="view-section">
+                <h3>Detailed Attendance Logs (In Dev)</h3>
+            </section>
+            <section id="view-results" class="view-section">
+                <div class="page-header">
+                    <h1 class="page-title">Exam Results & Reports</h1>
+                </div>
+                <div class="text-center mt-5">
+                    <i class="fas fa-file-invoice fa-4x text-muted mb-3"></i>
+                    <h3 class="text-muted">No recent result cards available.</h3>
+                </div>
+            </section>
+
+            <!-- 3. CURRICULUM VIEW (Student side) -->
+            <section id="view-curriculum" class="view-section">
+                <div class="page-header"
+                    style="justify-content: space-between; display: flex; align-items: center; gap: 1rem;">
+                    <div>
+                        <h1 class="page-title">Science Curriculum & Virtual Labs</h1>
+                        <div class="breadcrumb" id="student-level-display">Loading Level Profile...</div>
+                    </div>
+                    <a href="virtual-lab.html" class="btn btn-primary"
+                        style="background: #8e44ad; border-color: #8e44ad; white-space: nowrap; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);">
+                        <i class="fas fa-robot mr-2"></i> Enter AI Science Lab
+                    </a>
+                </div>
+
+                <div class="stats-grid mt-4">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon"><i class="fas fa-book-reader"></i></div>
+                        <div class="stat-details">
+                            <h4>Subject Materials</h4>
+                            <div class="value" id="count-materials" style="font-size: 1.5rem;">0</div>
+                            <small class="text-muted">PDFs, PPTs, Quizzes</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon"><i class="fas fa-flask"></i></div>
+                        <div class="stat-details">
+                            <h4>Virtual Labs</h4>
+                            <div class="value" id="count-labs" style="font-size: 1.5rem;">0</div>
+                            <small class="text-muted">Video Simulations</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-danger">
+                        <div class="stat-icon"><i class="fas fa-video"></i></div>
+                        <div class="stat-details">
+                            <h4>Live Sessions</h4>
+                            <div class="value" id="count-live" style="font-size: 1.5rem;">0</div>
+                            <small class="text-muted">Upcoming Zoom/Meet</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject Tabs (Dynamically generated based on level) -->
+                <div class="custom-tabs mt-4" id="curriculum-subject-tabs"
+                    style="display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+                    <!-- Tabs go here -->
+                </div>
+
+                <!-- Filtered List Container -->
+                <div class="table-container mt-4">
+                    <div class="table-header" style="background: rgba(26, 75, 132, 0.05);">
+                        <h3 class="mb-0" id="curriculum-list-title"><i class="fas fa-folder-open mr-2 text-primary"></i>
+                            Available Resources</h3>
+                    </div>
+                    <div style="padding: 1rem;" id="student-curriculum-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Dashboard Logic Script -->
+    <script src="js/ai-service.js"></script>
+    <script src="js/daily-challenge.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/student-curriculum.js"></script>
+</body>
+
+</html>
