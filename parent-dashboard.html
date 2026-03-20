@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard | AL-Faran School</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<script>
+    // Security check: Redirect to login if not authenticated as parent
+    if (sessionStorage.getItem('isParentLoggedIn') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<body class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header" style="background: rgba(0,0,0,0.1);">
+            <div class="sidebar-logo">
+                <img src="assets/logo.png" alt="AL-Faran Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="sidebar-brand">
+                <h3>Parent Portal</h3>
+            </div>
+        </div>
+
+        <div class="sidebar-nav">
+            <div class="nav-item">
+                <a class="nav-link-item active" data-target="overview">
+                    <div class="nav-icon"><i class="fas fa-home"></i></div>
+                    <div class="nav-text">Home Overview</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="attendance">
+                    <div class="nav-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="nav-text">Attendance</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="academics">
+                    <div class="nav-icon"><i class="fas fa-book"></i></div>
+                    <div class="nav-text">Academics & Results</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="fees">
+                    <div class="nav-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="nav-text">Fee Details & History</div>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link-item" data-target="communication">
+                    <div class="nav-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="nav-text">Message School</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar" style="background-color: var(--primary-light);" id="parent-avatar">P</div>
+                <div class="user-info">
+                    <div class="user-name" id="display-parent-name">Parent Account</div>
+                    <div class="user-role">Student: <span id="display-student-name">...</span></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="toggle-sidebar-btn" id="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-outline" id="theme-toggle" title="Toggle Dark Mode"
+                    style="border:none; padding: 0.5rem;">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="action-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge-indicator">1</span>
+                </div>
+                <a href="#" onclick="sessionStorage.clear(); window.location.href='login.html';" class="action-icon" title="Logout" style="color: var(--danger-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div class="dashboard-content">
+
+            <!-- 1. OVERVIEW VIEW -->
+            <section id="view-overview" class="view-section active">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title" id="welcome-parent">Welcome Parent</h1>
+                        <div class="breadcrumb" id="overview-breadcrumb">Overview for ...</div>
+                    </div>
+                </div>
+
+                <!-- Circular Progress & Fee Snapshot -->
+                <div class="stats-grid">
+                    <div class="stat-card stat-success">
+                        <!-- Simulated circular progress since we're using vanilla -->
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="stat-details">
+                            <h4>Monthly Attendance</h4>
+                            <div class="value" id="ov-attendance-val">--%</div>
+                            <small class="text-success" id="ov-attendance-count">0/0 Days Present</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon"><i class="fas fa-star-half-alt"></i></div>
+                        <div class="stat-details">
+                            <h4>Latest Test Score</h4>
+                            <div class="value" id="ov-result-val">--%</div>
+                            <small class="text-muted" id="ov-result-info">No exams found</small>
+                        </div>
+                    </div>
+
+                    <!-- Fee Widget Alert -->
+                    <div class="stat-card stat-danger" style="background: rgba(231, 76, 60, 0.05); cursor: pointer;"
+                        onclick="document.querySelector('[data-target=fees]').click()">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="stat-details">
+                            <h4>Fee Balance</h4>
+                            <div class="value" id="ov-fee-val">Rs 0</div>
+                            <small class="text-danger font-weight-bold" id="ov-fee-date">No pending fees</small>
+                        </div>
+                        <i class="fas fa-chevron-right text-muted" style="margin-left: auto;"></i>
+                    </div>
+                </div>
+
+                <!-- Global Notice Board Widget -->
+                <div class="mt-5 mb-2">
+                    <h3 class="mb-3"><i class="fas fa-bullhorn text-warning mr-2"></i> School Administration Notices
+                    </h3>
+                    <div id="global-notice-board">
+                        <!-- Populated by global-notices.js -->
+                    </div>
+                </div>
+
+                        </div>
+                        <div style="height: 250px;">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Homework/Events -->
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="mb-0">Recent Activities</h3>
+                        </div>
+                        <ul style="list-style: none; padding: 0;" id="recent-activities-list">
+                            <li class="text-center p-4 text-muted">Loading activities...</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. FEE MANAGEMENT VIEW -->
+            <section id="view-fees" class="view-section">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Fee Voucher & Finance</h1>
+                        <div class="breadcrumb" id="finance-breadcrumb">Financial overview for Usman Khan</div>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="mt-4" style="display: flex; gap: 15px; margin-bottom: 2rem;">
+                    <button class="btn btn-primary" id="btn-pay-online"><i class="fas fa-credit-card mr-2"></i> Pay
+                        Online</button>
+                    <button class="btn btn-outline" id="btn-print-voucher" onclick="window.print()"><i
+                            class="fas fa-print mr-2"></i> Print Voucher / Save PDF</button>
+                </div>
+
+                <!-- Fee Voucher Card -->
+                <div style="max-width: 800px; margin: 0 auto; background: var(--surface-color); padding: 3rem; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; overflow: hidden;"
+                    id="fee-voucher-container">
+
+                    <!-- Watermark -->
+                    <div id="voucher-watermark"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 8rem; font-weight: 800; color: rgba(231, 76, 60, 0.08); text-align: center; pointer-events: none; z-index: 0; white-space: nowrap;">
+                        PENDING
+                    </div>
+
+                    <!-- Voucher Content (Z-Index 1 to sit above watermark) -->
+                    <div style="position: relative; z-index: 1;">
+                        <!-- Voucher Header -->
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <img src="assets/logo.png" alt="School Logo"
+                                    style="width: 60px; height: 60px; object-fit: contain;">
+                                <div>
+                                    <h2 style="margin: 0; color: var(--primary-color);">AL-Faran School of Excellence
+                                    </h2>
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Main Depalpur
+                                        Road, Pakistani Pull</p>
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Phone:
+                                        0302-7627881</p>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <h3
+                                    style="margin: 0; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">
+                                    Fee Voucher</h3>
+                                <p style="margin: 5px 0 0 0; font-weight: 600;" id="voucher-month">Month: October 2026
+                                </p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">Voucher No: #<span
+                                        id="voucher-no">10294</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Student Details Grid -->
+                        <div
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; background: rgba(0,0,0,0.02); padding: 1.5rem; border-radius: var(--radius-sm);">
+                            <div>
+                                <p style="margin: 0 0 5px 0; color: var(--text-muted); font-size: 0.85rem;">Student Name
+                                </p>
+                                <p style="margin: 0; font-weight: 600; font-size: 1.1rem;" id="voucher-student-name">
+                                    Usman Khan</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 5px 0; color: var(--text-muted); font-size: 0.85rem;">Father's
+                                    Name</p>
+                                <p style="margin: 0; font-weight: 600; font-size: 1.1rem;" id="voucher-father-name">Mr.
+                                    Tariq</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 5px 0; color: var(--text-muted); font-size: 0.85rem;">Class /
+                                    Grade</p>
+                                <p style="margin: 0; font-weight: 600; font-size: 1.1rem;" id="voucher-class">Class 9
+                                </p>
+                            </div>
+                            <div>
+                                <p style="margin: 0 0 5px 0; color: var(--text-muted); font-size: 0.85rem;">Roll Number
+                                </p>
+                                <p style="margin: 0; font-weight: 600; font-size: 1.1rem;" id="voucher-roll">101</p>
+                            </div>
+                        </div>
+
+                        <!-- Fee Particulars Table -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+                            <thead>
+                                <tr style="background: var(--primary-color); color: white;">
+                                    <th style="padding: 12px; text-align: left;">Particulars</th>
+                                    <th style="padding: 12px; text-align: right;">Amount (Rs)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px;">Monthly Tuition Fee</td>
+                                    <td style="padding: 12px; text-align: right; font-weight: 500;"
+                                        id="voucher-fee-amount">5000</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px;">Previous Arrears / Balance</td>
+                                    <td style="padding: 12px; text-align: right; font-weight: 500;">0</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px;">Miscellaneous Charges</td>
+                                    <td style="padding: 12px; text-align: right; font-weight: 500;">0</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td
+                                        style="padding: 15px 12px; text-align: right; font-weight: bold; font-size: 1.2rem;">
+                                        Total Payable:</td>
+                                    <td style="padding: 15px 12px; text-align: right; font-weight: bold; font-size: 1.5rem; color: var(--danger-color);"
+                                        id="voucher-total-payable">Rs 5000</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <!-- Due Date & Status Strip -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border-radius: var(--radius-sm);"
+                            id="voucher-status-strip">
+                            <div>
+                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Payment Due Date:</p>
+                                <p style="margin: 5px 0 0 0; font-weight: bold; font-size: 1.2rem; color: var(--text-color);"
+                                    id="voucher-due-date">10th of Current Month</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Current Status:</p>
+                                <span class="status-badge status-overdue"
+                                    style="font-size: 1.1rem; padding: 5px 15px; margin-top: 5px; display: inline-block;"
+                                    id="voucher-status-badge">UNPAID</span>
+                            </div>
+                        </div>
+
+                        <!-- Bank Details -->
+                        <div
+                            style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-color); font-size: 0.85rem; color: var(--text-muted);">
+                            <h4 style="margin: 0 0 10px 0; color: var(--text-color);">Payment Instructions / Bank
+                                Details</h4>
+                            <p style="margin: 0 0 5px 0;"><strong>Bank Name:</strong> Allied Bank Limited (Depalpur
+                                Branch)</p>
+                            <p style="margin: 0 0 5px 0;"><strong>Account Title:</strong> Al-Faran School of Excellence
+                            </p>
+                            <p style="margin: 0 0 5px 0;"><strong>Account Number:</strong> 0010-123456789-01</p>
+                            <p style="margin: 0; font-style: italic; margin-top: 10px;">Note: Please attach the deposit
+                                slip to this voucher and submit it to the administration office, or use the online
+                                payment portal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. ATTENDANCE VIEW -->
+            <section id="view-attendance" class="view-section">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Attendance Record</h1>
+                        <div class="breadcrumb" id="attendance-breadcrumb">Attendance overview for Usman Khan</div>
+                    </div>
+                </div>
+
+                <div class="stats-grid mt-4">
+                    <!-- Today's Status -->
+                    <div class="chart-card"
+                        style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+                        <h3 class="mb-3">Today's Status</h3>
+                        <div id="today-status-icon"
+                            style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-muted);">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h2 id="today-status-text" class="text-muted">Not Marked Yet</h2>
+                        <p class="text-muted mt-2" id="today-status-date">--</p>
+                    </div>
+
+                    <!-- Monthly Percentage Chart -->
+                    <div class="chart-card"
+                        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <h3 class="mb-3">Monthly Attendance</h3>
+                        <div style="position: relative; width: 150px; height: 150px;">
+                            <canvas id="attendanceRingChart"></canvas>
+                            <div
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                <h2 id="monthly-percentage-text" style="margin: 0; color: var(--text-color);">--%</h2>
+                            </div>
+                        </div>
+                        <p class="text-muted mt-3" id="monthly-stats-text">-- / -- Days Present</p>
+                    </div>
+
+                    <!-- Mini Calendar -->
+                    <div class="chart-card">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 class="mb-0">Recent History</h3>
+                            <button class="btn btn-outline" style="padding: 2px 8px; font-size: 0.8rem;"><i
+                                    class="fas fa-calendar-alt mr-1"></i> Full Calendar</button>
+                        </div>
+                        <div id="mini-calendar"
+                            style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center;">
+                            <!-- Days of Week Headers -->
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">S</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">M</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">T</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">W</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">T</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">F</div>
+                            <div style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted);">S</div>
+                            <!-- Calendar Grid generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Absences Table -->
+                <div class="table-container mt-4">
+                    <div class="table-header">
+                        <h3 class="mb-0 text-danger"><i class="fas fa-exclamation-circle mr-2"></i> Absence Records</h3>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="absence-table-body">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <!-- 4. ACADEMICS & RESULTS VIEW -->
+            <section id="view-academics" class="view-section">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Result Cards & Academics</h1>
+                        <div class="breadcrumb" id="results-breadcrumb">Academic performance for Usman Khan</div>
+                    </div>
+                </div>
+
+                <!-- Exam Selector -->
+                <div class="table-container mt-4"
+                    style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(26, 75, 132, 0.03);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-file-alt text-primary fa-2x"></i>
+                        <div>
+                            <h3 class="mb-0">Select Examination</h3>
+                            <p class="text-muted" style="margin: 0; font-size: 0.85rem;">View detailed marks and teacher
+                                feedback.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <select id="parent-exam-select" class="form-control"
+                            style="min-width: 200px; font-weight: 600;">
+                            <option value="" disabled selected>Select Exam Term...</option>
+                            <option value="First Term">First Term</option>
+                            <option value="Mid Term">Mid Term</option>
+                            <option value="Final Exam">Final Exam</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Result Card Display (Hidden initially) -->
+                <div id="result-card-container" style="display: none; margin-top: 2rem;">
+
+                    <!-- Result Summary Header -->
+                    <div class="stats-grid">
+                        <div class="stat-card" style="border-left: 4px solid var(--primary-color);">
+                            <div class="stat-icon"><i class="fas fa-percentage text-primary"></i></div>
+                            <div class="stat-details">
+                                <h4 class="text-muted">Percentage</h4>
+                                <div class="value text-primary" id="rc-percentage">--%</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="border-left: 4px solid var(--success-color);">
+                            <div class="stat-icon"><i class="fas fa-award text-success"></i></div>
+                            <div class="stat-details">
+                                <h4 class="text-muted">Total Marks</h4>
+                                <div class="value text-success" id="rc-total-marks">-- / --</div>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="border-left: 4px solid var(--warning-color);">
+                            <div class="stat-icon"><i class="fas fa-star text-warning"></i></div>
+                            <div class="stat-details">
+                                <h4 class="text-muted">Overall Grade</h4>
+                                <div class="value text-warning" id="rc-grade">--</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject Wise Table -->
+                    <div class="table-container mt-4">
+                        <div class="table-header">
+                            <h3 class="mb-0">Detailed Subject Marks</h3>
+                            <button class="btn btn-outline" style="padding: 2px 10px; font-size: 0.8rem;"
+                                onclick="window.print()">
+                                <i class="fas fa-print mr-1"></i> Print Result
+                            </button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject Name</th>
+                                        <th>Total Marks</th>
+                                        <th>Marks Obtained</th>
+                                        <th>Subject Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rc-subjects-body">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Teacher's Comments -->
+                    <div class="table-container mt-4"
+                        style="background: rgba(243, 156, 18, 0.05); border: 1px solid rgba(243, 156, 18, 0.2);">
+                        <div style="padding: 1.5rem;">
+                            <h3 class="mb-3 text-warning"><i class="fas fa-quote-left mr-2"></i> Teacher's Feedback</h3>
+                            <p id="rc-remarks"
+                                style="font-size: 1.1rem; line-height: 1.6; font-style: italic; color: var(--text-color);">
+                                "No feedback provided yet."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="result-empty-state" class="text-center mt-5" style="display: none;">
+                    <i class="fas fa-folder-open fa-4x text-muted mb-3 opacity-50"></i>
+                    <h3 class="text-muted">No Results Found</h3>
+                    <p class="text-muted">The school administration has not uploaded the results for this exam yet.</p>
+                </div>
+            </section>
+            <section id="view-communication" class="view-section">
+                <div class="page-header">
+                    <h1 class="page-title">Direct Messaging</h1>
+                </div>
+                <div class="text-center mt-5">
+                    <i class="fas fa-comments fa-4x text-muted mb-3"></i>
+                    <h3 class="text-muted">Communicate directly with Class Teachers or Admin</h3>
+                    <button class="btn btn-primary mt-3">Start New Conversation</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Dashboard Logic Script -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/parent-attendance.js"></script>
+    <script src="js/parent-results.js"></script>
+    <script src="js/parent-fees.js"></script>
+    <script src="js/parent-overview.js"></script>
+    <script src="js/global-notices.js"></script>
+    <script src="js/parent-diary.js"></script>
+</body>
+
+</html>

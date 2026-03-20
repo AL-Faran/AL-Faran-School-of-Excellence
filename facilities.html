@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities | AL-Faran School of Excellence</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>
+        /* Navbar Visibility Fix */
+        .navbar:not(.scrolled) { 
+            background-color: white !important; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        .navbar:not(.scrolled) .nav-link, 
+        .navbar:not(.scrolled) .brand-name,
+        .navbar:not(.scrolled) .mobile-menu-btn { 
+            color: var(--primary-blue) !important; 
+        }
+        .navbar:not(.scrolled) #theme-toggle { 
+            color: var(--primary-blue) !important; 
+            border-color: rgba(26,75,132,0.2) !important; 
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="brand">
+                <div class="brand-logo"><img src="assets/logo.png" alt="AL-Faran Logo"
+                        style="width: 100%; height: 100%; object-fit: contain;"></div>
+                <div class="brand-name">
+                    AL-Faran School<br>
+                    <span style="font-size: 0.8rem; font-weight: 500; letter-spacing: 1px;">Of Excellence</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="admissions.html" class="nav-link">Admissions</a></li>
+                <li><a href="academics.html" class="nav-link">Academics</a></li>
+                <li><a href="downloads.html" class="nav-link">Downloads</a></li>
+                <li><a href="facilities.html" class="nav-link active">Facilities</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li>
+                    <button class="btn btn-outline" id="theme-toggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+                <li><a href="login.html" class="btn btn-secondary">Login Portal <i
+                            class="fas fa-sign-in-alt ms-1"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header Hero -->
+    <header class="hero"
+        style="min-height: 50vh; padding-top: 120px; align-items: flex-start; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/facilities-hero.png') no-repeat center center / cover;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content text-center animate-fade-in" style="margin-top: 2rem;">
+            <h1 class="hero-title" style="font-size: 3.5rem;">World-Class Facilities</h1>
+            <p class="hero-subtitle">Providing a secure, inspiring, and fully-equipped campus for optimal student
+                growth.</p>
+        </div>
+    </header>
+
+    <!-- Facilities Sections -->
+    <section class="py-5 bg-light" style="margin-top: -40px; position: relative; z-index: 10;">
+        <div class="container" style="display: flex; flex-direction: column; gap: 4rem;">
+
+            <!-- Science & Computer Labs -->
+            <div class="facility-row"
+                style="display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <div
+                    style="flex: 1; min-width: 300px; height: 350px; overflow: hidden; border-radius: var(--radius-md);">
+                    <img src="assets/science-it-lab.png" alt="Science & IT Labs" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <span class="badge bg-primary text-white mb-3">Tech-First</span>
+                    <h2 class="mb-3">Science & IT Skills Labs</h2>
+                    <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">Our campus houses fully
+                        modernized desktop laboratories. The IT Studio is where students learn essential Digital Skills
+                        (Web Development, Office Automation). The Physical Science labs are newly equipped for hands-on
+                        experiments alongside our integrated Virtual AI Simulations.</p>
+                    <ul class="text-muted" style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i>
+                            High-Speed Internet Access</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Modern
+                            Multi-core Workstations</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Safe
+                            Physics & Chemistry Apparatus</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Library & Play Area -->
+            <div class="facility-row"
+                style="display: flex; flex-wrap: wrap-reverse; gap: 3rem; align-items: center; background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <div style="flex: 1; min-width: 300px;">
+                    <span class="badge bg-warning text-white mb-3" style="color:var(--text-color) !important;">Holistic
+                        Development</span>
+                    <h2 class="mb-3">Rich Library & Sports Grounds</h2>
+                    <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">Beyond academics, we focus
+                        heavily on character and physical health. Our library boasts a wide collection of academic and
+                        fictional literature to cultivate a reading habit. The expansive play area hosts annual sports
+                        galas and daily physical training.</p>
+                    <ul class="text-muted" style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Expansive
+                            Reading Halls</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Dedicated
+                            Sports Instructors</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Safe,
+                            manicured outdoor recreational zones</li>
+                    </ul>
+                </div>
+                <div
+                    style="flex: 1; min-width: 300px; height: 350px; overflow: hidden; border-radius: var(--radius-md);">
+                    <img src="assets/library-sports.png" alt="Library & Sports" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Security & Transport -->
+            <div class="facility-row"
+                style="display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <div
+                    style="flex: 1; min-width: 300px; height: 350px; overflow: hidden; border-radius: var(--radius-md);">
+                    <img src="assets/security-transport.png" alt="Security & Transport" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <span class="badge bg-danger text-white mb-3">Safety First</span>
+                    <h2 class="mb-3">Campus Security & Transport</h2>
+                    <p class="text-muted mb-4" style="font-size: 1.1rem; line-height: 1.8;">We understand a parent's
+                        primary concern. Our campus is guarded 24/7 with comprehensive CCTV coverage. Further, we
+                        provide a reliable transport network connecting major residential areas to the school under
+                        strict supervision.</p>
+                    <ul class="text-muted" style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> 24/7
+                            Active CCTV Surveillance</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i> Secure
+                            entry & exit logging points</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle text-success mr-2"></i>
+                            School-owned Bus/Van Network</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <div class="brand mb-2">
+                    <div class="brand-logo"><img src="assets/logo.png" alt="AL-Faran Logo"
+                            style="width: 100%; height: 100%; object-fit: contain;"></div>
+                    <div class="brand-name" style="color: white;">AL-Faran</div>
+                </div>
+                <p class="text-muted">Empowering the next generation of leaders through quality education and strong
+                    moral values.</p>
+                <div class="social-links mt-2">
+                    <a href="https://www.facebook.com/Alfaran.school.of.Excellence" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 class="mb-2 text-white">Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="login.html">Portals Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 class="mb-2 text-white">Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Main Depalpur Road, Pakistani Pull</li>
+                    <li><i class="fas fa-phone"></i> 0302-7627881</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:alfaranschool20@gmail.com"
+                            style="color: white; text-decoration: none;">alfaranschool20@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center mt-4 pt-2 border-top">
+            <p class="text-muted">&copy; 2026 AL-Faran School of Excellence. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main Global Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
