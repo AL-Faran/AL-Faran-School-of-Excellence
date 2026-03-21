@@ -152,6 +152,19 @@
             .stats-grid { flex-direction: column; gap: 40px; }
             .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 60px 30px; }
         }
+
+        /* Footer Styles */
+        .footer { background: #1a1a1a; color: white; padding: 60px 0 20px 0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .brand-logo { width: 45px; height: 45px; flex-shrink: 0; }
+        .brand-name { font-size: 1.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; }
+        .footer-links ul, .footer-contact ul { list-style: none; }
+        .footer-links li, .footer-contact li { margin-bottom: 10px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--primary-gold); }
+        .social-links a { color: white; margin-right: 15px; font-size: 1.2rem; opacity: 0.7; transition: 0.3s; }
+        .social-links a:hover { opacity: 1; color: var(--primary-gold); }
     </style>
 </head>
 <body>
@@ -338,11 +351,11 @@
     <section class="stats-section">
         <div class="container stats-grid">
             <div class="stat-card">
-                <h3 class="counter" data-target="1500">0</h3>
+                <h3 class="counter" data-target="1200">0</h3>
                 <p>Happy Students</p>
             </div>
             <div class="stat-card">
-                <h3 class="counter" data-target="85">0</h3>
+                <h3 class="counter" data-target="45">0</h3>
                 <p>Expert Teachers</p>
             </div>
             <div class="stat-card">
