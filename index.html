@@ -351,11 +351,11 @@
     <section class="stats-section">
         <div class="container stats-grid">
             <div class="stat-card">
-                <h3 class="counter" data-target="1200">0</h3>
+                <h3 class="counter" data-target="500">0</h3>
                 <p>Happy Students</p>
             </div>
             <div class="stat-card">
-                <h3 class="counter" data-target="45">0</h3>
+                <h3 class="counter" data-target="16">0</h3>
                 <p>Expert Teachers</p>
             </div>
             <div class="stat-card">
@@ -370,6 +370,29 @@
     </section>
 
     <script>
+        // Dynamic Stats Counter Update from Dashboard Data
+        const updateStatsFromData = () => {
+            try {
+                const students = JSON.parse(localStorage.getItem('alfaran-students') || '[]');
+                const teachers = JSON.parse(localStorage.getItem('alfaran-teachers') || '[]');
+                
+                // Find counters by their labels to be more robust
+                const statCards = document.querySelectorAll('.stat-card');
+                statCards.forEach(card => {
+                    const label = card.querySelector('p')?.innerText.toLowerCase();
+                    const counter = card.querySelector('.counter');
+                    if (label && counter) {
+                        if (label.includes('student') && students.length > 0) {
+                            counter.setAttribute('data-target', students.length);
+                        } else if (label.includes('teacher') && teachers.length > 0) {
+                            counter.setAttribute('data-target', teachers.length);
+                        }
+                    }
+                });
+            } catch (e) { console.error('Error updating stats:', e); }
+        };
+        updateStatsFromData();
+
         // Stats Animation
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
